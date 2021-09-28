@@ -97,7 +97,7 @@ if( EXISTS "${lapackpp_TEST_DIR}/test.cc" )
     ${lapackpp_TEST_DIR}/test_lange.cc
     # ${lapackpp_TEST_DIR}/test_langt.cc
     # ${lapackpp_TEST_DIR}/test_lanhb.cc
-    # ${lapackpp_TEST_DIR}/test_lanhe.cc
+    ${lapackpp_TEST_DIR}/test_lanhe.cc
     # ${lapackpp_TEST_DIR}/test_lanhp.cc
     # ${lapackpp_TEST_DIR}/test_lanhs.cc
     # ${lapackpp_TEST_DIR}/test_lanst.cc

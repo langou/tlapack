@@ -70,9 +70,13 @@ real_type<TA> lanhe(
     using blas::isnan;
     using blas::sqrt;
     using blas::real;
+    using blas::pow;
     
     // constants
     const real_t zero(0.0);
+    const real_t safe_max = pow(
+        std::numeric_limits<real_t>::radix,
+        std::numeric_limits<real_t>::max_exponent - real_t(1.0) );
 
     // quick return
     if (n == 0)
@@ -170,6 +174,7 @@ real_type<TA> lanhe(
     else if ( normType == Norm::Fro )
     {
         real_t scale(0.0), sum(1.0);
+        // Sum all elements from one side out of the main diagonal
         if( uplo == Uplo::Upper ) {
             for (idx_t j = 1; j < n; ++j)
                 lassq(j, &(A(0,j)), 1, scale, sum);
@@ -178,10 +183,17 @@ real_type<TA> lanhe(
             for (idx_t j = 0; j < n-1; ++j)
                 lassq(n-j-1, &(A(j+1,j)), 1, scale, sum);
         }
-        sum *= 2;
+        // Multiplies the sum by 2
+        if( sum < safe_max ) {
+            sum *= 2;
+        } else {
+            scale *= sqrt(2);
+        }
+        // Sum the elements in the main diagonal
         lassq(n-1, &(A(0,0)), lda+1, scale, sum,
             []( const TA& x ){ return blas::abs(real(x)); }
         );
+        // Compute the norm
         norm = scale * sqrt(sum);
     }
 
