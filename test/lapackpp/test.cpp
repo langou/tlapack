@@ -117,13 +117,13 @@ std::vector< testsweeper::routines_t > routines = {
 //     { "ptsv",               test_ptsv,      Section::posv },
 //     { "",                   nullptr,        Section::newline },
 
-//     { "potrf",              test_potrf,     Section::posv },
+    { "potrf",              test_potrf,     Section::posv },
 //     { "pptrf",              test_pptrf,     Section::posv },
 //     { "pbtrf",              test_pbtrf,     Section::posv },
 //     { "pttrf",              test_pttrf,     Section::posv },
 //     { "",                   nullptr,        Section::newline },
 
-//     { "potrs",              test_potrs,     Section::posv },
+    { "potrs",              test_potrs,     Section::posv },
 //     { "pptrs",              test_pptrs,     Section::posv },
 //     { "pbtrs",              test_pbtrs,     Section::posv },
 //     { "pttrs",              test_pttrs,     Section::posv },

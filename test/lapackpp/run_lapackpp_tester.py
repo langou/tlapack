@@ -365,12 +365,12 @@ cmds = []
 #     [ 'gtrfs', gen + dtype + align + n + trans ],
 #     ]
 
-# # Cholesky
-# if (opts.chol):
-#     cmds += [
+# Cholesky
+if (opts.chol):
+    cmds += [
 #     [ 'posv',  gen + dtype + align + n + uplo ],
-#     [ 'potrf', gen + dtype + align + n + uplo ],
-#     [ 'potrs', gen + dtype + align + n + uplo ],
+    [ 'potrf', gen + dtype + align + n + uplo ],
+    [ 'potrs', gen + dtype + align + n + uplo ],
 #     [ 'potri', gen + dtype + align + n + uplo ],
 #     [ 'pocon', gen + dtype + align + n + uplo ],
 #     [ 'porfs', gen + dtype + align + n + uplo ],
@@ -399,7 +399,7 @@ cmds = []
 #     [ 'pttrs', gen + dtype + align + n + uplo ],
 #     [ 'ptcon', gen + dtype         + n ],
 #     [ 'ptrfs', gen + dtype + align + n + uplo ],
-#     ]
+    ]
 
 # # symmetric indefinite, Bunch-Kaufman
 # if (opts.sysv):

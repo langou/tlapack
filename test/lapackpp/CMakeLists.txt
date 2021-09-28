@@ -127,9 +127,9 @@ if( EXISTS "${lapackpp_TEST_DIR}/test.cc" )
     # ${lapackpp_TEST_DIR}/test_poequ.cc
     # ${lapackpp_TEST_DIR}/test_porfs.cc
     # ${lapackpp_TEST_DIR}/test_posv.cc
-    # ${lapackpp_TEST_DIR}/test_potrf.cc
+    ${lapackpp_TEST_DIR}/test_potrf.cc
     # ${lapackpp_TEST_DIR}/test_potri.cc
-    # ${lapackpp_TEST_DIR}/test_potrs.cc
+    ${lapackpp_TEST_DIR}/test_potrs.cc
     # ${lapackpp_TEST_DIR}/test_ppcon.cc
     # ${lapackpp_TEST_DIR}/test_ppequ.cc
     # ${lapackpp_TEST_DIR}/test_pprfs.cc

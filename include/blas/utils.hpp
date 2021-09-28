@@ -57,7 +57,7 @@ using std::floor;
  * @ingroup utils
  */
 template< typename real_t >
-inline real_t conj( const real_t& x )
+inline const real_t& conj( const real_t& x )
 {
     // This prohibits complex types; it can't be called as y = blas::conj( x ).
     static_assert( ! is_complex<real_t>::value,

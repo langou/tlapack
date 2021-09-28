@@ -39,6 +39,11 @@ namespace lapack {
  *    TINY*EPS -- tiniest representable number;
  *    HUGE     -- biggest representable number.
  * 
+ * @tparam TX   Type of the elements in x
+ * @tparam Func Type of the function used for computing the absolute value
+ *      @see lassq( blas::idx_t, TX const*, blas::int_t, real_type<TX> &, real_type<TX> & )
+ *      for the example using blas::abs 
+ * 
  * @param[in] n The number of elements to be used from the vector x.
  * @param[in] x Array of dimension $(1+(n-1)*\abs(incx))$.
  * @param[in] incx. The increment between successive values of the vector x.
@@ -50,14 +55,15 @@ namespace lapack {
  * @param[in] scl
  * @param[in] sumsq
  * 
- * @ingroup
+ * @ingroup norm
  */
-template< typename TX >
+template< typename TX, typename Func >
 void lassq(
     blas::idx_t n,
     TX const* x, blas::int_t incx,
     real_type<TX> &scl,
-    real_type<TX> &sumsq)
+    real_type<TX> &sumsq,
+    Func absFunc )
 {
     typedef real_type<TX> real_t;
     using blas::isnan;
@@ -100,7 +106,7 @@ void lassq(
 
     for (idx_t i = 0; i < n; ++i)
     {
-        real_t ax = blas::abs( x[ix] ); 
+        real_t ax = absFunc( x[ix] ); 
         if( ax > tbig )
             abig += SQUARE(ax*sbig);
         else if( ax < tsml ) {
@@ -163,6 +169,25 @@ void lassq(
     }
 
     #undef SQUARE
+}
+
+/** Updates a sum of squares represented in scaled form.
+ * 
+ * Uses blas::abs to compute the absolute value of each term.
+ * @see lassq( blas::idx_t, TX const*, blas::int_t, real_type<TX> &, real_type<TX> &, Func )
+ * 
+ * @ingroup norm
+ */
+template< typename TX >
+inline void lassq(
+    blas::idx_t n,
+    TX const* x, blas::int_t incx,
+    real_type<TX> &scl,
+    real_type<TX> &sumsq )
+{
+    lassq( n, x, incx, scl, sumsq,
+        []( const TX& x ){ return blas::abs(x); }
+    );
 }
 
 } // lapack
